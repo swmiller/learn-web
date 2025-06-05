@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Center the form on the page */
+      body {
+        background: #f4f6fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      #nameForm {
+        background: #fff;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08),
+          0 1.5px 4px rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 320px;
+      }
+      #nameForm label {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+      #nameForm input[type="text"] {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #cfd8dc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+      }
+      #nameForm input[type="text"]:focus {
+        border-color: #1976d2;
+        outline: none;
+        background: #e3f2fd;
+      }
+      #nameForm button[type="submit"] {
+        background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+        transition: background 0.2s, transform 0.1s;
+      }
+      #nameForm button[type="submit"]:hover {
+        background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.03);
+      }
+      #messageBox {
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+        min-height: 1.5em;
+        text-align: center;
+        font-weight: 500;
+      }
+      /* Custom dialog styles */
+      #customDialog {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      #customDialog > div {
+        background: #fff;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+        min-width: 300px;
+        text-align: center;
+        position: relative;
+      }
+      #closeDialogBtn {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem 1.2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- User Name Form -->
+    <form id="nameForm" autocomplete="off">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+      <br />
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <!-- Message box for displaying the combined name -->
+    <div
+      id="messageBox"
+      style="margin-top: 1em; color: green; display: none"
+    ></div>
+    <!-- Custom dialog overlay for displaying the full name -->
+    <div
+      id="customDialog"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 2rem 2.5rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+          min-width: 300px;
+          text-align: center;
+          position: relative;
+        "
+      >
+        <span
+          id="dialogMessage"
+          style="font-size: 1.2rem; font-weight: 500"
+        ></span>
+        <br /><br />
+        <button
+          id="closeDialogBtn"
+          style="
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+          "
+        >
+          OK
+        </button>
+      </div>
+    </div>
+    <script>
+      // Get references to DOM elements
+      const form = document.getElementById("nameForm");
+      const firstNameInput = document.getElementById("firstName");
+      const lastNameInput = document.getElementById("lastName");
+      const messageBox = document.getElementById("messageBox");
+      const customDialog = document.getElementById("customDialog");
+      const dialogMessage = document.getElementById("dialogMessage");
+      const closeDialogBtn = document.getElementById("closeDialogBtn");
+
+      // Utility function to trim and validate input
+      function isValidName(name) {
+        return name && name.trim().length > 0;
+      }
+
+      // Handle form submission
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get trimmed values
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+
+        // Error handling: Check for empty fields
+        if (!isValidName(firstName) || !isValidName(lastName)) {
+          messageBox.style.display = "block";
+          messageBox.style.color = "red";
+          messageBox.textContent = "Both first and last names are required.";
+          // Set focus to the first empty field
+          if (!isValidName(firstName)) {
+            firstNameInput.focus();
+          } else {
+            lastNameInput.focus();
+          }
+          return;
+        }
+
+        // Combine names and display in custom dialog
+        const fullName = `${firstName} ${lastName}`;
+        dialogMessage.textContent = `Hello, ${fullName}!`;
+        customDialog.style.display = "flex";
+        // Hide the inline message box if visible
+        messageBox.style.display = "none";
+
+        // Clear the input fields
+        form.reset();
+        // Set focus back to the first name field after dialog closes
+      });
+
+      // Close dialog and set focus to first name
+      closeDialogBtn.addEventListener("click", function () {
+        customDialog.style.display = "none";
+        firstNameInput.focus();
+      });
+
+      // Optional: Close dialog with Escape key
+      window.addEventListener("keydown", function (e) {
+        if (
+          customDialog.style.display === "flex" &&
+          (e.key === "Escape" || e.key === "Enter")
+        ) {
+          customDialog.style.display = "none";
+          firstNameInput.focus();
+        }
+      });
+
+      // Set initial focus to first name field for better UX
+      window.addEventListener("DOMContentLoaded", () => {
+        firstNameInput.focus();
+      });
+    </script>
+  </body>
+</html>
