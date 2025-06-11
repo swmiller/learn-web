@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>In Line Test</title>
+    <style>
+      h2 {
+        display: inline-block;
+        border: red 1px solid; /* Show black border */
+        background-color: yellow; /* Show yellow background */
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px; /* Vertically centers single-line text */
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Harry</h2>
+    <h2 id="potter">Potter</h2>
+    <script>
+      /* Playing around with "display: inline-block" and "display: none" */
+      const potter = document.getElementById("potter");
+      let visible = true;
+      setInterval(() => {
+        visible = !visible;
+        if (visible) {
+          potter.classList.remove("hidden");
+        } else {
+          potter.classList.add("hidden");
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
