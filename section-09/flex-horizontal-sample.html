@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flex Sample (horizontal)</title>
+    <style>
+      body {
+        background: linear-gradient(
+          90deg,
+          #ffe9d6 0%,
+          #b3e5fc 40%,
+          #ffd1dc 70%,
+          #fffbe6 100%
+        );
+        margin: 0;
+        font-size: 18px;
+      }
+      .container {
+        display: flex;
+        gap: 16px;
+        background-color: #fffbe6;
+        padding: 32px 32px;
+        max-width: 1200px;
+        margin: 40px auto;
+      }
+      .column {
+        background-color: #fffde7;
+        padding: 24px;
+        border: 1px solid #ffe0b2;
+        border-radius: 12px;
+        color: #4e5d6c;
+        box-shadow: 0 2px 8px rgba(189, 224, 254, 0.13);
+        flex: 1 1 0;
+        font-family: "Segoe UI", "Arial", sans-serif;
+      }
+      .column.one {
+        background-color: #ffe0b2;
+        border-color: #ffd180;
+      }
+      .column.two {
+        background-color: #b3e5fc;
+        border-color: #81d4fa;
+      }
+      .column.three {
+        background-color: #ffd1dc;
+        border-color: #ffb6c1;
+      }
+      h1 {
+        text-align: center;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #ffb74d;
+        margin-top: 32px;
+        text-shadow: 1px 2px 8px #fffde7;
+      }
+      @media (max-width: 800px) {
+        .container {
+          flex-direction: column;
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flexbox Sample (horizontal)</h1>
+    <div class="container">
+      <div class="column one">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
+        urna eu tincidunt consectetur, nisi nisl aliquam enim, eget facilisis
+        sapien enim nec erat. Pellentesque habitant morbi tristique senectus et
+        netus et malesuada fames ac turpis egestas.
+      </div>
+      <div class="column two">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
+        urna eu tincidunt consectetur, nisi nisl aliquam enim, eget facilisis
+        sapien enim nec erat. Pellentesque habitant morbi tristique senectus et
+        netus et malesuada fames ac turpis egestas.
+      </div>
+      <div class="column three">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
+        urna eu tincidunt consectetur, nisi nisl aliquam enim, eget facilisis
+        sapien enim nec erat. Pellentesque habitant morbi tristique senectus et
+        netus et malesuada fames ac turpis egestas.
+      </div>
+    </div>
+  </body>
+</html>

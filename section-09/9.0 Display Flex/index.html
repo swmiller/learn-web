@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Column Layout Methods</title>
+    <style>
+      p {
+        padding: 0;
+        margin: 0;
+        font-weight: 700;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Column Layout Methods</title>
-  <style>
-    p {
-      padding: 0;
-      margin: 0;
-      font-weight: 700;
-    }
+      li {
+        list-style: none;
+      }
 
-    li {
-      list-style: none;
-    }
+      .container {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        background-color: gold;
+      }
 
-    .container {
-      padding: 10px;
-      background-color: gold;
-    }
+      /* The HTML was not well formed because of the missing <ul> tag. I added the <ul> tag to fix the structure.
+         and then added "display: flex" to the container and <ul> tage to get the proper layout. */
 
-  </style>
-</head>
+      ul {
+        display: flex;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="container">
-    <p>Page Layout Methods</p>
-
-    <li><a href="./html-table.html">HTML Table</a></li>
-    <li><a href="./inline-block.html">Inline-Block</li>
-    <li><a href="./absolute-position.html">Absolute Positioning</li>
-    <li><a href="./float.html">Float</li>
-    <li><a href="./flex.html">Flexbox</li>
-
-  </div>
-</body>
-
+  <body>
+    <div class="container">
+      <p>Page Layout Methods</p>
+      <ul>
+        <li><a href="./html-table.html">HTML Table</a></li>
+        <li><a href="./inline-block.html">Inline-Block</a></li>
+        <li><a href="./absolute-position.html">Absolute Positioning</a></li>
+        <li><a href="./float.html">Float</a></li>
+        <li><a href="./flex.html">Flexbox</a></li>
+      </ul>
+    </div>
+  </body>
 </html>

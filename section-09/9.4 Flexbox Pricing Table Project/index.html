@@ -13,8 +13,67 @@
         font-family: "Sono", sans-serif;
       }
 
-      /* Hint: What can you do with a media query and flexbox? */
+      .pricing-container {
+        display: flex;
+        gap: 20px; /* Add space between plans */
+        margin-top: 100px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pricing-plan {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        flex: 1; /* Allow plans to grow equally */
+        max-width: 400px;
+      }
+
+      /* Attempt to get the feature list to left align but stay centered */
+      .plan-features {
+        list-style: none;
+        padding-left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        text-align: left;
+      }
+
+      .plan-title {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .plan-price {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .plan-button {
+        background-color: coral;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.75rem;
+      }
+
       @media (max-width: 1250px) {
+        .pricing-container {
+          flex-direction: column;
+        }
+
+        .pricing-plan {
+          width: 320px;
+          max-width: 90vw;
+          margin-left: auto;
+          margin-right: auto;
+        }
       }
     </style>
   </head>
