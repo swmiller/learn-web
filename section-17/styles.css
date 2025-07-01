@@ -1,31 +1,70 @@
 .container {
-  width: 70%;
-  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
   text-align: center;
+}
+
+.dice-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .dice {
   text-align: center;
-  display: inline-block;
-
+  /* Remove inline-block, let flexbox handle layout */
 }
 
 body {
-  background-color: #393E46;
+  background-color: #393e46;
 }
 
 h1 {
   margin: 30px;
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   text-shadow: 5px 0 #232931;
   font-size: 8rem;
-  color: #4ECCA3;
+  color: #4ecca3;
+}
+
+.play-btn {
+  margin-top: 20px;
+  padding: 1rem 2.5rem;
+  font-size: 2rem;
+  font-family: "Indie Flower", cursive;
+  color: #fff;
+  background: linear-gradient(90deg, #4ecca3, #232931);
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.play-btn:hover {
+  background: linear-gradient(90deg, #232931, #4ecca3);
+  transform: scale(1.05);
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 p {
   font-size: 2rem;
-  color: #4ECCA3;
-  font-family: 'Indie Flower', cursive;
+  color: #4ecca3;
+  font-family: "Indie Flower", cursive;
 }
 
 img {
@@ -34,8 +73,7 @@ img {
 
 footer {
   margin-top: 5%;
-  color: #EEEEEE;
+  color: #eeeeee;
   text-align: center;
-  font-family: 'Indie Flower', cursive;
-
+  font-family: "Indie Flower", cursive;
 }
