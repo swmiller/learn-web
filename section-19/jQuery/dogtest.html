@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dog Breeds Viewer</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 2rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .subbreed {
+        font-size: 0.9em;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐾 Dog Breeds</h1>
+    <button hx-get="/breeds" hx-target="#breed-table" hx-swap="innerHTML">
+      Load Breeds
+    </button>
+
+    <div id="breed-table">
+      <!-- Table will be loaded here -->
+    </div>
+
+    <!-- Backend simulation using htmx + JavaScript -->
+    <script>
+      document.body.addEventListener("htmx:configRequest", function (evt) {
+        if (evt.detail.path === "/breeds") {
+          evt.preventDefault();
+
+          fetch("https://dog.ceo/api/breeds/list/all")
+            .then((res) => res.json())
+            .then((data) => {
+              const breeds = data.message;
+              let html = `
+              <table>
+                <thead>
+                  <tr>
+                    <th>Breed</th>
+                    <th>Sub-breeds</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+              for (const [breed, subbreeds] of Object.entries(breeds)) {
+                html += `
+                <tr>
+                  <td>${breed}</td>
+                  <td>${subbreeds.length > 0 ? subbreeds.join(", ") : "-"}</td>
+                </tr>
+              `;
+              }
+              html += "</tbody></table>";
+              document.querySelector("#breed-table").innerHTML = html;
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
