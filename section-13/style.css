@@ -1,0 +1,69 @@
+/* Styles moved from inline <style> block in index.html */
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+main {
+  display: grid;
+  /* 3-column grid: sidebar + two content tracks */
+  grid-template-columns: 260px 1fr 1fr;
+  /* Two explicit rows: first for Section 2 spanning, second for Sections 3 & 4 */
+  /* First row shrinks to Section 2's content, second row takes remaining space */
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "sidebar main main"
+    "sidebar left right";
+  gap: 12px;
+  padding: 12px;
+  min-height: 100vh; /* ensure grid itself fills viewport height */
+  box-sizing: border-box;
+  align-items: start; /* top-align content blocks in right column */
+}
+
+section {
+  color: #222;
+  padding: 24px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Left column (first section) */
+#talent-profile-headshot {
+  background: #fde2e4;
+  grid-area: sidebar; /* spans both rows */
+  height: 100vh; /* occupy full viewport height */
+  box-sizing: border-box;
+  position: sticky;
+  top: 0; /* optional: stays in view while scrolling */
+  overflow-y: auto; /* allow scroll if its content exceeds viewport */
+  display: flex;
+  flex-direction: column;
+  /* Optional: remove vertical centering to avoid influencing row distribution */
+  justify-content: flex-start; /* place sidebar content at top */
+  align-items: center; /* horizontal centering (optional) */
+}
+
+/* Remaining sections stack in the right column */
+#talent-profile-title {
+  background: #bee1e6;
+  grid-area: main; /* spans columns 2-3 in first row */
+}
+
+#talent-profile-experience {
+  background: #f0efeb;
+  grid-area: left; /* second row, first content column */
+  min-height: 100vh; /* fill viewport height like section 1 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#talent-profile-about {
+  background: #dfe7fd;
+  grid-area: right; /* second row, second content column */
+  min-height: 100vh; /* fill viewport height like section 1 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
